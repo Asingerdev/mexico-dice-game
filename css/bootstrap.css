@@ -15,3 +15,15 @@ h1.Rye-font {
 #content-div {
     margin-top: 10px;
 }
+
+#main-row {
+    height: 450px;
+    border: 2px black solid;
+    background-color: #c1ad65;
+}
+
+/* div.p-2 {
+    background-color: gray !important;
+    color: white;
+    padding: 10px;
+} */
