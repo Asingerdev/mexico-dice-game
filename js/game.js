@@ -16,6 +16,11 @@ const game = {
         } else {
             this.setUp();
         }
+    },
+    play(){
+        if($turn.text === 'Turn: Player'){
+            
+        }
     }
 }
 
