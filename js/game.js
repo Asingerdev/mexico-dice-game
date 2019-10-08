@@ -45,10 +45,3 @@ const comp = {
 const $round = $('#round');
 const $turn = $('#turn');
 const $roll = $('#roll-button');
-<<<<<<< HEAD
-=======
-
-game.setUp();
-console.log($turn.text())
-game.endTurn();
->>>>>>> endTurn

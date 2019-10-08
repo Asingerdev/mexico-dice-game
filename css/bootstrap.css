@@ -30,9 +30,9 @@ h1.Rye-font {
     margin: 10px 0px 10px 0px;
 }
 
-#roll-button{
+#roll-button, #end-button{
   width: 100px;
-  margin: 0 100px 0 0;
+  margin: 5px;
   background: linear-gradient(180deg,#fea 0%,#dc8 49%,#a95 51%,#dc8 100%);
   border-radius: 5px;
   border: 1px solid #ba6;
