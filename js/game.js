@@ -17,9 +17,13 @@ const game = {
             this.setUp();
         }
     },
-    play(){
-        if($turn.text === 'Turn: Player'){
-            
+    endTurn(){
+        if($turn.text() === 'Turn: Player'){
+            $roll.attr("disabled", true);
+            $turn.text(`Turn: Comp`);
+        } else if($turn.text() === 'Turn: Comp'){
+            $roll.attr("disabled", false);
+            $turn.text(`Turn: Player`);
         }
     }
 }
@@ -40,3 +44,4 @@ const comp = {
 
 const $round = $('#round');
 const $turn = $('#turn');
+const $roll = $('#roll-button');
