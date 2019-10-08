@@ -35,8 +35,3 @@ const comp = {
 
 const $round = $('#round');
 const $turn = $('#turn');
-
-game.setUp();
-console.log(p.score);
-console.log(comp.score);
-console.log(game.round)
