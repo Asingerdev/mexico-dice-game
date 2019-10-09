@@ -139,7 +139,13 @@ $roll.on('click', function(e){
         }else if(p.rollCount === comp.rollCount && p.leadRoll === false){
             game.endTurn();
         }
-        $end.animate({'opacity':100}, 'slow');
+        $end.css({'opacity': 1});
 })
 
-game.compRoll();
+//End Turn Button
+$end.on('click', function(e){
+    game.endTurn();
+    $end.animate({'opacity':0}, 'slow')
+})
+
+game.setUp();
