@@ -5,18 +5,22 @@ const game = {
     round: 0,
     setUp(){
         p.score = initialRoll();
+        console.log(`Player rolls a ${p.score}`);
         comp.score = initialRoll();
+        console.log(`Computer rolls a ${comp.score}`);
         if(p.score > comp.score){
             this.round++;
             $round.text(`Round: ${this.round}`);
             p.leadRoll = true;
             $turn.text(`Turn: Player`);
+            console.log(`Player rolls first`);
         } else if(comp.score > p.score){
             this.round++;
             $round.text(`Round: ${this.round}`);
             p.leadRoll = false;
             $roll.attr("disabled", true);
             $turn.text(`Turn: Comp`);
+            console.log(`Computer rolls first`);
         } else {
             this.setUp();
         }
@@ -30,6 +34,18 @@ const game = {
             $roll.attr("disabled", false);
             $turn.text(`Turn: Player`);
         }
+    },
+    compRoll(){
+        comp.score = diceRoll();
+        console.log(`Computer rolls a ${comp.score}`);
+        $cScore.text(`Score: ${comp.score}`);
+        comp.increaseCount();
+        $cThrows.text(`Dice Throws: ${comp.rollCount}`)
+        if(scoreArr.includes(comp.score) || 55 < comp.score < 66 ||comp.rollCount === 3){
+            this.endTurn();
+        }else if(44 < comp.score < 55){
+            this.endTurn();
+        }
     }
 }
 
@@ -42,6 +58,9 @@ class Player {
         this.leadRoll = null;
         this.rollCount = 0;
     }
+    increaseCount(){
+        this.rollCount++;
+    }
 };
 
 //Player and computer objects
@@ -49,7 +68,10 @@ const p = new Player("greg", 3);
 
 const comp = {
     score: 0,
-    rollCount: 0
+    rollCount: 0,
+    increaseCount(){
+        this.rollCount++;
+    }
 };
 
 //Global JQuery DOM elements
@@ -59,6 +81,8 @@ const $roll = $('#roll-button');
 const $end = $('#end-button');
 const $pScore = $('#p-score');
 const $pThrows = $('#p-throws');
+const $cScore = $('#c-score');
+const $cThrows = $('#c-throws');
 
 //Scoring System
 const scoreArr = [21, 66, 55, 44, 33, 22, 11];
