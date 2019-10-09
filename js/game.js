@@ -9,24 +9,25 @@ const game = {
         if(p.score > comp.score){
             this.round++;
             $round.text(`Round: ${this.round}`);
+            p.leadRoll = true;
             $turn.text(`Turn: Player`);
-
         } else if(comp.score > p.score){
             this.round++;
             $round.text(`Round: ${this.round}`);
+            p.leadRoll = false;
+            $roll.attr("disabled", true);
             $turn.text(`Turn: Comp`);
         } else {
             this.setUp();
         }
     },
     endTurn(){
-        if($turn.text() === 'Turn: Player'){
+        if(p.leadRoll === true){
             $roll.attr("disabled", true);
-            $end.hide();
+            $end.animate({'opacity':0}, 'slow');
             $turn.text(`Turn: Comp`);
-        } else if($turn.text() === 'Turn: Comp'){
+        }else if(p.leadRoll === false){
             $roll.attr("disabled", false);
-            $end.hide();
             $turn.text(`Turn: Player`);
         }
     }
@@ -48,7 +49,6 @@ const p = new Player("greg", 3);
 
 const comp = {
     score: 0,
-    leadRoll: null,
     rollCount: 0
 };
 
@@ -58,6 +58,7 @@ const $turn = $('#turn');
 const $roll = $('#roll-button');
 const $end = $('#end-button');
 const $pScore = $('#p-score');
+const $pThrows = $('#p-throws');
 
 //Scoring System
 const scoreArr = [21, 66, 55, 44, 33, 22, 11];
@@ -88,11 +89,19 @@ const checkScore = function(pScore,compScore){
     }
 }
 
+//Roll Button
 $roll.on('click', function(e){
-    p.score = diceRoll();
-    $pScore.text(`Score: ${p.score}`);
-    p.rollCount++;
-    if(p.score === 21){
-        game.endTurn();
-    }
+        p.score = diceRoll();
+        console.log(`Player rolls a ${p.score}`)
+        $pScore.text(`Score: ${p.score}`);
+        p.rollCount++;
+        $pThrows.text(`Dice Throws: ${p.rollCount}`)
+        if(p.score === 21 && p.leadRoll === true){
+            game.endTurn();
+        }else if(p.rollCount === 3 && p.leadRoll === true){
+            game.endTurn();
+        }else if(p.rollCount === comp.rollCount && p.leadRoll === false){
+            game.endTurn();
+        }
+        $end.animate({'opacity':100}, 'slow');
 })
