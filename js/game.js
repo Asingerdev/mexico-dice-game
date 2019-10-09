@@ -41,10 +41,12 @@ const game = {
         $cScore.text(`Score: ${comp.score}`);
         comp.increaseCount();
         $cThrows.text(`Dice Throws: ${comp.rollCount}`)
-        if(scoreArr.includes(comp.score) || 55 < comp.score < 66 ||comp.rollCount === 3){
+        if(scoreArr.includes(comp.score) || (55 < comp.score && comp.score < 66) ||comp.rollCount === 3){
             this.endTurn();
-        }else if(44 < comp.score < 55){
-            this.endTurn();
+        }else if((33 < comp.score && comp.score < 44) || (44 < comp.score && comp.score < 55)){
+            reRoll();
+        }else if((11 < comp.score && comp.score < 22) || (22 < comp.score && comp.score < 33)){
+            this.compRoll();
         }
     }
 }
@@ -113,6 +115,16 @@ const checkScore = function(pScore,compScore){
     }
 }
 
+//function that gives 50/50 chance whether the computer rolls dice again
+const reRoll = function(){
+    const num = Math.floor(Math.random()*100);
+    if(num > 50){
+        game.endTurn();
+    }else if(num <= 50){
+        game.compRoll();
+    }
+}
+
 //Roll Button
 $roll.on('click', function(e){
         p.score = diceRoll();
@@ -129,3 +141,5 @@ $roll.on('click', function(e){
         }
         $end.animate({'opacity':100}, 'slow');
 })
+
+game.compRoll();
