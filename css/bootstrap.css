@@ -20,6 +20,11 @@ div.col-sm-8 {
     overflow: hidden;
 }
 
+#desert {
+    max-width: 100%;
+    height: auto;
+}
+
 #main-row {
     height: 450px;
     border: 2px black solid;

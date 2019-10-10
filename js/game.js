@@ -46,10 +46,12 @@ const game = {
             this.compRoll();
             $roll.attr("disabled", false);
             p.winRound = null;
+            p.leadRoll = false;
             $turn.text(`Turn: Comp`);
         }else if(p.winRound === false){
             $roll.attr("disabled", false);
             p.winRound = null;
+            p.leadRoll = true;
             $turn.text(`Turn: Player`);
         }else if(p.winRound === null){
             this.setUp();
@@ -58,6 +60,7 @@ const game = {
     endRound(){
         if(p.lives === 0){
             alert('Player loses game!')
+            $roll.animate({'opacity':0}, 'slow');
         }
         p.clearCount();
         p.clearScore();
@@ -307,20 +310,18 @@ $roll.on('click', function(e){
         }else if(p.rollCount === 3 && p.leadRoll === true){
             game.endTurn();
         }
-        // else if((p.rollCount === comp.rollCount && comp.rollCount > 0) && p.leadRoll === false){
-        //     game.endRound();
-        // }
-        
+        if(p.rollCount === comp.rollCount && p.leadRoll === false){
+            $roll.attr("disabled", true);
+            checkScore(p.score, comp.score);
+        }   
 })
 
 //End Turn Button
 $end.on('click', function(e){
     if(p.leadRoll === true){
-        console.log(p.leadRoll)
         game.endTurn();
         game.compRoll();
     }else if(p.leadRoll === false){
-        console.log(p.leadRoll)
         checkScore(p.score,comp.score);
     }
 })
