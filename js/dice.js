@@ -20,5 +20,3 @@ const diceRoll = function(){
     return Number(newNum);
 }
 
-diceRoll();
-
