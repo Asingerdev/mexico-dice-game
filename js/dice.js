@@ -4,7 +4,7 @@ const initialRoll = function(){
     return Math.floor(Math.random()*6 + 1);
 }
 
-//Global dice roll function that takes the number from each die and concatenates them into a new number that is the score from the roll
+//Global dice roll function that takes the number from each die rolled ////and concatenates them into a new number that determines the score from //the roll
 const diceRoll = function(){
     const randNum1 = Math.floor(Math.random()*6 + 1);
     const randNum2 = Math.floor(Math.random()*6 + 1);
