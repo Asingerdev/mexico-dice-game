@@ -43,11 +43,14 @@ const game = {
     },
     setRound(){
         if(p.winRound === true){
-            p.winRound === null;
             this.compRoll();
-        }else if(p.winRound === false){
-            p.winRound === null;
             $roll.attr("disabled", false);
+            p.winRound = null;
+            $turn.text(`Turn: Comp`);
+        }else if(p.winRound === false){
+            $roll.attr("disabled", false);
+            p.winRound = null;
+            $turn.text(`Turn: Player`);
         }else if(p.winRound === null){
             this.setUp();
         }
@@ -60,10 +63,12 @@ const game = {
         p.clearScore();
         comp.clearCount();
         comp.clearScore();
+        $end.animate({'opacity':0}, 'slow');
         this.increaseRound();
         $round.text(`Round: ${this.round}`)
         if(this.round === 5){
-            alert('Player wins game!')
+            alert('Player wins game!');
+            $roll.attr("disabled", true);
         }else{
         this.setRound();
         }
@@ -82,7 +87,6 @@ const game = {
             }else if(p.rollCount === 2){
                 if(comp.rollCount === 2){
                     checkScore(p.score,comp.score);
-                    this.endRound();
                 }else if(scoreArr.includes(p.score) && scoreArr.includes(comp.score)){
                     const index1 = scoreArr.indexOf(p.score);
                     const index2 = scoreArr.indexOf(comp.score);
@@ -97,20 +101,21 @@ const game = {
                         alert('Round is a tie!');
                         this.endRound();
                     }
-                }else if(scoreArr.includes(pScore) && !scoreArr.includes(compScore)){
+                }else if(scoreArr.includes(p.score) && !scoreArr.includes(comp.score)){
                     this.compRoll();
-                }else if(scoreArr.includes(compScore) && !scoreArr.includes(pScore)){
+                }else if(scoreArr.includes(comp.score) && !scoreArr.includes(p.score)){
                     alert('Computer wins round!');
                     p.winRound = false;
                     p.loseLives();
-                }else if(!scoreArr.includes(pScore) && !scoreArr.includes(compScore)){
-                    if(pScore > compScore){
+                }else if(!scoreArr.includes(p.score) && !scoreArr.includes(comp.score)){
+                    if(p.score > comp.score){
                         this.compRoll();
-                    }else if(compScore > pScore){
+                    }else if(comp.score > p.score){
                         alert('Computer wins round!');
                         p.winRound = false;
                         p.loseLives();
-                    }else if(pScore === compScore){
+                        this.endRound();
+                    }else if(p.score === comp.score){
                         alert('Round is a tie!');
                         this.endRound();
                     }
@@ -133,20 +138,20 @@ const game = {
                         alert('Round is a tie!');
                         this.endRound();
                     }
-                }else if(scoreArr.includes(pScore) && !scoreArr.includes(compScore)){
+                }else if(scoreArr.includes(p.score) && !scoreArr.includes(comp.score)){
                     this.compRoll();
-                }else if(scoreArr.includes(compScore) && !scoreArr.includes(pScore)){
+                }else if(scoreArr.includes(comp.score) && !scoreArr.includes(p.score)){
                     alert('Computer wins round!');
                     p.winRound = false;
                     p.loseLives();
-                }else if(!scoreArr.includes(pScore) && !scoreArr.includes(compScore)){
-                    if(pScore > compScore){
+                }else if(!scoreArr.includes(p.score) && !scoreArr.includes(comp.score)){
+                    if(p.score > comp.score){
                         this.compRoll();
-                    }else if(compScore > pScore){
+                    }else if(comp.score > p.score){
                         alert('Computer wins round!');
                         p.winRound = false;
                         p.loseLives();
-                    }else if(pScore === compScore){
+                    }else if(p.score === comp.score){
                         alert('Round is a tie!');
                         this.endRound();
                     }
@@ -157,7 +162,9 @@ const game = {
     //Whether computer rolls again based on certain
     //scoring thresholds
     compDecide(){
-        if(scoreArr.includes(comp.score) || (55 < comp.score && comp.score < 66) || comp.rollCount === 3 || (p.leadRoll === true && comp.rollCount === p.rollCount)){
+        if(comp.score === 21){
+            this.endTurn();
+        }else if(scoreArr.includes(comp.score) || (55 < comp.score && comp.score < 66) || comp.rollCount === 3 || (p.leadRoll === true && comp.rollCount === p.rollCount)){
             this.endTurn();
         }else if((33 < comp.score && comp.score < 44) || (44 < comp.score && comp.score < 55)){
             reRoll();
@@ -179,6 +186,7 @@ class Player {
     }
     increaseCount(){
         this.rollCount++;
+        $pThrows.text(`Dice Throws: ${p.rollCount}`)
     }
     loseLives(){
         this.lives--;
@@ -233,30 +241,38 @@ const checkScore = function(pScore,compScore){
         if(index2 > index1){
             alert('Player wins round!');
             p.winRound = true;
+            game.endRound();
         }else if(index1 > index2){
             alert('Computer wins round!');
             p.winRound = false;
             p.loseLives();
+            game.endRound();
         }else if(index1 === index2){
             alert('Round is a tie!');
+            game.endRound();
         }
     }else if(scoreArr.includes(pScore) && !scoreArr.includes(compScore)){
         alert('Player wins round!');
         p.winRound = true;
+        game.endRound();
     }else if(scoreArr.includes(compScore) && !scoreArr.includes(pScore)){
         alert('Computer wins round!');
         p.winRound = false;
         p.loseLives();
+        game.endRound();
     }else if(!scoreArr.includes(pScore) && !scoreArr.includes(compScore)){
         if(pScore > compScore){
             alert('Player wins round!');
             p.winRound = true;
+            game.endRound();
         }else if(compScore > pScore){
             alert('Computer wins round!');
             p.winRound = false;
             p.loseLives();
+            game.endRound();
         }else if(pScore === compScore){
             alert('Round is a tie!');
+            game.endRound();
         }
     }
 }
@@ -278,26 +294,30 @@ $roll.on('click', function(e){
         console.log(`Player rolls a ${p.score}`)
         $pScore.text(`Score: ${p.score}`);
         p.increaseCount();
-        $pThrows.text(`Dice Throws: ${p.rollCount}`)
+        if(p.rollCount === 1 || p.rollCount === 2 || p.rollCount === 3){
+            $end.css({'opacity': 1});
+        }
         if(p.score === 21 && p.leadRoll === true){
             game.endTurn();
         }else if(p.rollCount === 3 && p.leadRoll === true){
             game.endTurn();
-        }else if(p.rollCount === comp.rollCount && p.leadRoll === false){
-            game.endTurn();
         }
-        $end.css({'opacity': 1});
+        // else if((p.rollCount === comp.rollCount && comp.rollCount > 0) && p.leadRoll === false){
+        //     game.endRound();
+        // }
+        
 })
 
 //End Turn Button
 $end.on('click', function(e){
-    game.endTurn();
-    $end.animate({'opacity':0}, 'slow');
-    $roll.attr("disabled", true);
     if(p.leadRoll === true){
+        console.log(p.leadRoll)
+        game.endTurn();
         game.compRoll();
-        game.endRound();
     }else if(p.leadRoll === false){
-        game.endRound();
+        console.log(p.leadRoll)
+        checkScore(p.score,comp.score);
     }
 })
+
+game.setUp();
