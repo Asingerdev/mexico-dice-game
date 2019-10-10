@@ -190,6 +190,7 @@ class Player {
     }
     loseLives(){
         this.lives--;
+        $pLives.text(`Lives: ${p.lives}`);
     }
     clearCount(){
         this.rollCount = 0;
@@ -227,8 +228,10 @@ const $roll = $('#roll-button');
 const $end = $('#end-button');
 const $pScore = $('#p-score');
 const $pThrows = $('#p-throws');
+const $pLives = $('#p-lives')
 const $cScore = $('#c-score');
 const $cThrows = $('#c-throws');
+const $play = $('#play');
 
 //Scoring System
 const scoreArr = [21, 66, 55, 44, 33, 22, 11];
@@ -288,6 +291,8 @@ const reRoll = function(){
     }
 }
 
+//Event Listeners
+
 //Roll Button
 $roll.on('click', function(e){
         p.score = diceRoll();
@@ -320,4 +325,15 @@ $end.on('click', function(e){
     }
 })
 
-game.setUp();
+//Play Hover
+$play.hover(function() {
+    $play.css("background-color", "white");
+}, function() {
+    $play.css("background-color", "");
+})
+
+//Click to play game
+$play.on('click', function() {
+    game.setUp();
+    $play.off('click');
+})
