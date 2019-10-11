@@ -53,15 +53,15 @@ Computer AI
 
 The computer decides how many times to roll based on the following logic:
 
-If the computer is the lead roller and it rolls Mexico ('21'), a double number or a number between 55 and 66, it will end its turn. 
+If the computer is the lead roller and it rolls Mexico ('21') or a double number, it will end its turn. 
 
-If it rolls between 33 and 44, or between 44 and 55, there is a 50% chance it will reroll. 
+If it rolls 53, 54, 61, 62, 63, 64 or 65, there is a 50% chance it will reroll.  
 
-If it rolls between 11 and 22, or between 22 and 33, it will reroll.
+If it rolls 31, 32, 41, 42, 43, 51 or 52 it will reroll.
 
 If the computer is the second roller, it will follow the same logic, except it is limited by the number of times the player rolled, and if any of its rolls beat the player, it will end its turn. 
 
-Future versions of the game can adjust the computer AI's difficulty based upon the game's advanced probability tables. 
+Future versions of the game can adjust the computer AI's difficulty based upon the game's probability tables. 
 
 User Stories
 ------------
