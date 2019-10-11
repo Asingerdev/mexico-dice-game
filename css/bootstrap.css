@@ -61,7 +61,18 @@ div.row {
 }
 
 div.h4 {
-    text-decoration: underline;
+    text-decoration: none;
+}
+
+#inputName {
+    background: white;
+    border: none;
+    font-size: 15px;
+    border-radius: 5px;
+}
+
+#submit {
+    font-size: 15px
 }
 
 div.p-2 {

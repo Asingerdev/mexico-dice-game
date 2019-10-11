@@ -70,7 +70,7 @@ const game = {
         $end.animate({'opacity':0}, 'slow');
         this.increaseRound();
         $round.text(`Round: ${this.round}`)
-        if(this.round === 5){
+        if(this.round === 5 && p.lives !== 0){
             alert('Player wins game!');
             $roll.attr("disabled", true);
         }else{
@@ -236,6 +236,7 @@ const $pLives = $('#p-lives')
 const $cScore = $('#c-score');
 const $cThrows = $('#c-throws');
 const $play = $('#play');
+const $inputName = $('#inputName')
 
 //Scoring System
 const scoreArr = [21, 66, 55, 44, 33, 22, 11];
@@ -334,8 +335,16 @@ $play.hover(function() {
     $play.css("background-color", "");
 })
 
-//Click to play game
+//Click text to play game
 $play.on('click', function() {
-    game.setUp();
+    $inputName.attr('hidden', false)
+    $('#submit').attr('hidden', false)
     $play.off('click');
+})
+
+//Name Input
+$('#submit').on('click', (e) => {
+    const $inputValue = $inputName.val();
+    $('#player-name').text(`Player: ${$inputValue}`);
+    const timeoutID = setTimeout($.proxy(game.setUp, game), 3000)
 })
