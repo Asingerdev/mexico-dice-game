@@ -17,16 +17,16 @@ const game = {
             this.round++;
             $round.text(`Round: ${this.round}`);
             p.leadRoll = true;
-            $roll.attr("disabled", false);
-            $turn.text(`Turn: Player`);
-            console.log(`Player rolls first`);
+            $roll.attr('disabled', false);
+            $turn.text('Turn: Player');
+            $transBox.text('Player rolls first');
         } else if(comp.score > p.score){
             this.round++;
             $round.text(`Round: ${this.round}`);
             p.leadRoll = false;
-            $roll.attr("disabled", true);
-            $turn.text(`Turn: Comp`);
-            console.log(`Computer rolls first`);
+            $roll.attr('disabled', true);
+            $turn.text('Turn: Comp');
+            $transBox.text('Computer rolls first');
             this.compRoll();
         } else {
             this.setUp();
@@ -60,7 +60,7 @@ const game = {
     },
     endRound(){
         if(p.lives === 0){
-            alert('Player loses game!')
+            $transBox.text('Player loses game!');
             $roll.animate({'opacity':0}, 'slow');
         }
         p.clearCount();
@@ -236,7 +236,9 @@ const $pLives = $('#p-lives')
 const $cScore = $('#c-score');
 const $cThrows = $('#c-throws');
 const $play = $('#play');
-const $inputName = $('#inputName')
+const $about = $('#about');
+const $inputName = $('#inputName');
+const $transBox = $('#transbox');
 
 //Scoring System
 const scoreArr = [21, 66, 55, 44, 33, 22, 11];
@@ -333,6 +335,13 @@ $play.hover(function() {
     $play.css("background-color", "white");
 }, function() {
     $play.css("background-color", "");
+})
+
+//About Hover
+$about.hover(function() {
+    $about.css("background-color", "white");
+}, function() {
+    $about.css("background-color", "");
 })
 
 //Click text to play game
