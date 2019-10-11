@@ -21,12 +21,12 @@ Although there are thirty-six possible results for any roll of two dice, in Mexi
 
 The full list of possible scores in the game and the number of ways to roll them is below:
 
-*31, 32: 2 ways
-*41, 42, 43: 2 ways
-*51, 52, 53, 54: 2 ways
-*61, 62, 63, 64, 65: 2 ways
-*any double: 1 way
-*21("Mexico): 2 ways
+>31, 32: 2 ways
+>41, 42, 43: 2 ways
+>51, 52, 53, 54: 2 ways
+>61, 62, 63, 64, 65: 2 ways
+>any double: 1 way
+>21("Mexico): 2 ways
 
 The `rollDice()` function in the dice.js file outputs a score according to these rule by comparing the numbers from each die rolled and checking which is greater, like so:
 
