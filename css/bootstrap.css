@@ -12,6 +12,10 @@ h1.Rye-font {
     font-size: 3em;
 }
 
+small.small, #about {
+    color: inherit;
+}
+
 .modal-content {
     white-space: pre-line;
 }

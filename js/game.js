@@ -238,6 +238,7 @@ const $play = $('#play');
 const $about = $('#about');
 const $inputName = $('#inputName');
 const $transBox = $('#transbox');
+const $rollSound = $('#roll-sound')
 
 //Scoring System
 const scoreArr = [21, 66, 55, 44, 33, 22, 11];

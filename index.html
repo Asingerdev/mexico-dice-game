@@ -17,10 +17,10 @@
         <div class="page-header">
             <h1 class="display-2 Rye-font text-uppercase">
                 Mexico
-                <small>The Dice Game </small>
-                <small>|</small>
-                <small id="play">Play</small>
-                <small>|</small>
+                <small class="small">The Dice Game </small>
+                <small class="small">|</small>
+                <small class="small" id="play">Play</small>
+                <small class="small">|</small>
                 <small id="about" data-toggle="modal" data-target="#aboutModal"> About</small>
                 <div id="aboutModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
@@ -53,6 +53,7 @@
                     <span id="round">Round:</span>
                     <span class="pull-right"><button type="button" class="btn btn-secondary btn-lg" style="opacity: 0;" data-toggle="button" aria-pressed="false" autocomplete="off" id="end-button">End</button></span>
                     <span class="pull-right"><button type="button" class="btn btn-lg" data-toggle="button" aria-pressed="false" autocomplete="off" id="roll-button" disabled>Roll</button></span>
+                    <audio id="roll-sound" src="assets/sounds/dice-roll.wav" type="audio/wav" preload="auto" controls="none" style="display: none;"></audio>
                 </h4>
                 <h4><span class="d-flex flex-row" id="turn">Turn:</span></h4>
             </div>
@@ -77,6 +78,7 @@
 
 
     <script src="js/dice.js"></script>
+    <script src="js/sound.js"></script>
     <script src="js/game.js"></script>
 </body>
 </html>
