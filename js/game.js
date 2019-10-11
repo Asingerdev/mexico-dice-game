@@ -5,6 +5,7 @@ const game = {
     round: 0,
     increaseRound(){
         this.round++
+        $round.text(`Round: ${this.round}`);
     },
     //Sets up turn order in the first round 
     //after player and computer each roll one die
@@ -14,15 +15,13 @@ const game = {
         comp.score = initialRoll();
         console.log(`Computer rolls a ${comp.score}`);
         if(p.score > comp.score){
-            this.round++;
-            $round.text(`Round: ${this.round}`);
+            this.increaseRound();
             p.leadRoll = true;
             $roll.attr('disabled', false);
             $turn.text('Turn: Player');
             $transBox.text('Player rolls first');
         } else if(comp.score > p.score){
-            this.round++;
-            $round.text(`Round: ${this.round}`);
+            this.increaseRound();
             p.leadRoll = false;
             $roll.attr('disabled', true);
             $turn.text('Turn: Comp');
@@ -34,26 +33,26 @@ const game = {
     },
     endTurn(){
         if(p.leadRoll === true){
-            $roll.attr("disabled", true);
+            $roll.attr('disabled', true);
             $end.animate({'opacity':0}, 'slow');
-            $turn.text(`Turn: Comp`);
+            $turn.text('Turn: Comp');
         }else if(p.leadRoll === false){
-            $roll.attr("disabled", false);
-            $turn.text(`Turn: Player`);
+            $roll.attr('disabled', false);
+            $turn.text('Turn: Player');
         }
     },
     setRound(){
         if(p.winRound === true){
-            this.compRoll();
-            $roll.attr("disabled", false);
+            setTimeout($.proxy(this.compRoll, game), 2000);
+            $roll.attr('disabled', false);
             p.winRound = null;
             p.leadRoll = false;
-            $turn.text(`Turn: Comp`);
+            $turn.text('Turn: Comp');
         }else if(p.winRound === false){
-            $roll.attr("disabled", false);
+            $roll.attr('disabled', false);
             p.winRound = null;
             p.leadRoll = true;
-            $turn.text(`Turn: Player`);
+            $turn.text('Turn: Player');
         }else if(p.winRound === null){
             this.setUp();
         }
@@ -71,20 +70,20 @@ const game = {
         this.increaseRound();
         $round.text(`Round: ${this.round}`)
         if(this.round === 5 && p.lives !== 0){
-            alert('Player wins game!');
-            $roll.attr("disabled", true);
+            $transBox.text('Player wins game!');
+            $roll.attr('disabled', true);
         }else{
         this.setRound();
         }
     },
     compRoll(){
         comp.score = diceRoll();
-        console.log(`Computer rolls a ${comp.score}`);
+        $transBox.text(`Computer rolls ${comp.score}`);
         $cScore.text(`Score: ${comp.score}`);
         comp.increaseCount();
         $cThrows.text(`Dice Throws: ${comp.rollCount}`)
         if(p.leadRoll === false){
-            this.compDecide();
+            setTimeout($.proxy(this.compDecide, game), 2000);
         } else if(p.leadRoll === true){
             if(p.rollCount === 1){
                 checkScore(p.score,comp.score);
@@ -95,32 +94,32 @@ const game = {
                     const index1 = scoreArr.indexOf(p.score);
                     const index2 = scoreArr.indexOf(comp.score);
                     if(index2 > index1){
-                        this.compRoll();
+                        setTimeout($.proxy(this.compRoll, game), 2000);
                     }else if(index1 > index2){
-                        alert('Computer wins round!');
+                        $transBox.text('Computer wins round!');
                         p.winRound = false;
                         p.loseLives();
                         this.endRound();
                     }else if(index1 === index2){
-                        alert('Round is a tie!');
+                        $transBox.text('Round is a tie!');
                         this.endRound();
                     }
                 }else if(scoreArr.includes(p.score) && !scoreArr.includes(comp.score)){
-                    this.compRoll();
+                    setTimeout($.proxy(this.compRoll, game), 2000);
                 }else if(scoreArr.includes(comp.score) && !scoreArr.includes(p.score)){
-                    alert('Computer wins round!');
+                    $transBox.text('Computer wins round!');
                     p.winRound = false;
                     p.loseLives();
                 }else if(!scoreArr.includes(p.score) && !scoreArr.includes(comp.score)){
                     if(p.score > comp.score){
-                        this.compRoll();
+                        setTimeout($.proxy(this.compRoll, game), 2000);
                     }else if(comp.score > p.score){
-                        alert('Computer wins round!');
+                        $transBox.text('Computer wins round!');
                         p.winRound = false;
                         p.loseLives();
                         this.endRound();
                     }else if(p.score === comp.score){
-                        alert('Round is a tie!');
+                        $transBox.text('Round is a tie!');
                         this.endRound();
                     }
                 }
@@ -132,31 +131,31 @@ const game = {
                     const index1 = scoreArr.indexOf(p.score);
                     const index2 = scoreArr.indexOf(comp.score);
                     if(index2 > index1){
-                        this.compRoll();
+                        setTimeout($.proxy(this.compRoll, game), 2000);
                     }else if(index1 > index2){
-                        alert('Computer wins round!');
+                        $transBox.text('Computer wins round!');
                         p.winRound = false;
                         p.loseLives();
                         this.endRound();
                     }else if(index1 === index2){
-                        alert('Round is a tie!');
+                        $transBox.text('Round is a tie!');
                         this.endRound();
                     }
                 }else if(scoreArr.includes(p.score) && !scoreArr.includes(comp.score)){
-                    this.compRoll();
+                    setTimeout($.proxy(this.compRoll, game), 2000);
                 }else if(scoreArr.includes(comp.score) && !scoreArr.includes(p.score)){
-                    alert('Computer wins round!');
+                    $transBox.text('Computer wins round!');
                     p.winRound = false;
                     p.loseLives();
                 }else if(!scoreArr.includes(p.score) && !scoreArr.includes(comp.score)){
                     if(p.score > comp.score){
-                        this.compRoll();
+                        setTimeout($.proxy(this.compRoll, game), 2000);
                     }else if(comp.score > p.score){
-                        alert('Computer wins round!');
+                        $transBox.text('Computer wins round!');
                         p.winRound = false;
                         p.loseLives();
                     }else if(p.score === comp.score){
-                        alert('Round is a tie!');
+                        $transBox.text('Round is a tie!');
                         this.endRound();
                     }
                 }
@@ -173,7 +172,7 @@ const game = {
         }else if(comp.score === 53 || comp.score === 54 || (55 < comp.score && comp.score < 66)){
             reRoll();
         }else{
-            this.compRoll();
+            setTimeout($.proxy(this.compRoll, game), 2000);
         }
     }
 }
@@ -249,39 +248,39 @@ const checkScore = function(pScore,compScore){
         const index1 = scoreArr.indexOf(pScore);
         const index2 = scoreArr.indexOf(compScore);
         if(index2 > index1){
-            alert('Player wins round!');
+            $transBox.text('Player wins round!');
             p.winRound = true;
             game.endRound();
         }else if(index1 > index2){
-            alert('Computer wins round!');
+            $transBox.text('Computer wins round!');
             p.winRound = false;
             p.loseLives();
             game.endRound();
         }else if(index1 === index2){
-            alert('Round is a tie!');
+            $transBox.text('Round is a tie!');
             game.endRound();
         }
     }else if(scoreArr.includes(pScore) && !scoreArr.includes(compScore)){
-        alert('Player wins round!');
+        $transBox.text('Player wins round!');
         p.winRound = true;
         game.endRound();
     }else if(scoreArr.includes(compScore) && !scoreArr.includes(pScore)){
-        alert('Computer wins round!');
+        $transBox.text('Computer wins round!');
         p.winRound = false;
         p.loseLives();
         game.endRound();
     }else if(!scoreArr.includes(pScore) && !scoreArr.includes(compScore)){
         if(pScore > compScore){
-            alert('Player wins round!');
+            $transBox.text('Player wins round!');
             p.winRound = true;
             game.endRound();
         }else if(compScore > pScore){
-            alert('Computer wins round!');
+            $transBox.text('Computer wins round!');
             p.winRound = false;
             p.loseLives();
             game.endRound();
         }else if(pScore === compScore){
-            alert('Round is a tie!');
+            $transBox.text('Round is a tie!');
             game.endRound();
         }
     }
@@ -294,7 +293,7 @@ const reRoll = function(){
     if(num > 50){
         game.endTurn();
     }else if(num <= 50){
-        game.compRoll();
+        setTimeout($.proxy(this.compRoll, game), 2000);
     }
 }
 
@@ -303,7 +302,7 @@ const reRoll = function(){
 //Roll Button
 $roll.on('click', function(e){
         p.score = diceRoll();
-        console.log(`Player rolls a ${p.score}`)
+        $transBox.text(`Player rolls ${p.score}`)
         $pScore.text(`Score: ${p.score}`);
         p.increaseCount();
         if(p.rollCount === 1 || p.rollCount === 2 || p.rollCount === 3){
@@ -324,7 +323,7 @@ $roll.on('click', function(e){
 $end.on('click', function(e){
     if(p.leadRoll === true){
         game.endTurn();
-        game.compRoll();
+        setTimeout($.proxy(game.compRoll, game), 2000);
     }else if(p.leadRoll === false){
         checkScore(p.score,comp.score);
     }
@@ -355,7 +354,7 @@ $play.on('click', function() {
 $('#submit').on('click', (e) => {
     const $inputValue = $inputName.val();
     $('#player-name').text(`Player: ${$inputValue}`);
-    const timeoutID = setTimeout($.proxy(game.setUp, game), 3000)
+    const timeoutID = setTimeout($.proxy(game.setUp, game), 2000);
 })
 
 //Modal CSS
