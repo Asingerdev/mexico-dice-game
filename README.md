@@ -5,7 +5,11 @@ Introduction
 ------------
 Mexico is an elimination-style dice game with unique game mechanics.  
 
-Some versions of Mexico incorporate betting, but in this version one player plays against a computer AI. The player is given a set amount of lives and must win a fixed number of rounds against the computer in order to win the game. The number of lives the player has and number of rounds they must win can be adjusted to change the difficulty. 
+Some versions of Mexico incorporate betting, but in this version one player plays against a computer AI. The player is given a set amount of lives and must win a fixed number of rounds against the computer in order to win the game. The number of lives the player has and number of rounds they must win can be adjusted to change the difficulty.
+
+Live Link
+---------
+[Mexico: The Dice Game](https://kefka223.github.io/Mexico-Dice-Game/)
 
 Scoring System
 --------------
