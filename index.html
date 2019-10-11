@@ -9,6 +9,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Roboto|Rye&display=swap" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css" media="screen">
 </head>
 <body>
@@ -24,25 +25,25 @@
     </div>
     <div class="container" id="content-div">
         <div class="row" id="main-row">
-            <div class="col-sm-8" style="height: 450px; max-width: auto;">
+            <div class="col-sm-8 pull-left" style="height: 450px; max-width: auto;">
                 <img src="assets/images/mexican-desert.png" class="img-fluid" id="desert" alt="desert">
                 <h4>
                     <span id="round">Round:</span>
                     <span class="pull-right"><button type="button" class="btn btn-secondary btn-lg" style="opacity: 0;" data-toggle="button" aria-pressed="false" autocomplete="off" id="end-button">End</button></span>
                     <span class="pull-right"><button type="button" class="btn btn-secondary btn-lg" data-toggle="button" aria-pressed="false" autocomplete="off" id="roll-button" disabled>Roll</button></span>
-                    
                 </h4>
                 <h4><span class="d-flex flex-row" id="turn">Turn:</span></h4>
             </div>
             <div class="col-sm-4" style="height: 450px;">
                 <div class="row">
-                    <div class="d-flex flex-sm-column" style="height:225px;">
+                    <div class="d-flex flex-sm-column" style="height:150px;">
                         <div class="h4">Player 1</div>
                         <div class="p-2" id="p-lives">Lives:</div>
                         <div class="p-2" id="p-throws">Dice Throws:</div>
                         <div class="p-2" id="p-score">Score:</div>
                     </div>
-                    <div class="d-flex flex-sm-column justify-content-end">
+                    <div class="transbox"><p>Some text</p></div>
+                    <div class="d-flex flex-sm-column justify-content-end" style="height:150px;">
                         <div class="h4">Computer</div>
                         <div class="p-2" id="c-throws">Dice Throws:</div>
                         <div class="p-2" id="c-score">Score:</div>
