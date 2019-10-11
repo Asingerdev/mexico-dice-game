@@ -17,6 +17,7 @@ const game = {
             this.round++;
             $round.text(`Round: ${this.round}`);
             p.leadRoll = true;
+            $roll.attr("disabled", false);
             $turn.text(`Turn: Player`);
             console.log(`Player rolls first`);
         } else if(comp.score > p.score){
@@ -167,11 +168,11 @@ const game = {
     compDecide(){
         if(comp.score === 21){
             this.endTurn();
-        }else if(scoreArr.includes(comp.score) || (55 < comp.score && comp.score < 66) || comp.rollCount === 3 || (p.leadRoll === true && comp.rollCount === p.rollCount)){
+        }else if(scoreArr.includes(comp.score) || comp.rollCount === 3 || (p.leadRoll === true && comp.rollCount === p.rollCount)){
             this.endTurn();
-        }else if((33 < comp.score && comp.score < 44) || (44 < comp.score && comp.score < 55)){
+        }else if(comp.score === 53 || comp.score === 54 || (55 < comp.score && comp.score < 66)){
             reRoll();
-        }else if((11 < comp.score && comp.score < 22) || (22 < comp.score && comp.score < 33)){
+        }else{
             this.compRoll();
         }
     }
