@@ -11,6 +11,15 @@ Live Link
 ---------
 [Mexico: The Dice Game](https://kefka223.github.io/Mexico-Dice-Game/)
 
+Technologies Used
+-----------------
+- HTML5
+- JavaScript es6
+- JQuery
+- Google Fonts
+- Bootstrap
+- CSS
+
 Scoring System
 --------------
 In each round the player and computer roll two dice. The game has a unique scoring system that concatenates the numbers from each die to determine the score of the roll. For instance, if the player rolls a '5' on the first die, and a '4' on the second die, their score would be 54. Similarly, a roll of '2' and '2' would result in a score of 22. 
@@ -21,12 +30,22 @@ Although there are thirty-six possible results for any roll of two dice, in Mexi
 
 The full list of possible scores in the game and the number of ways to roll them is below:
 
->31, 32: 2 ways
->41, 42, 43: 2 ways
->51, 52, 53, 54: 2 ways
->61, 62, 63, 64, 65: 2 ways
->any double: 1 way
->21("Mexico): 2 ways
+- 31, 32: 2 ways
+
+
+- 41, 42, 43: 2 ways
+
+
+- 51, 52, 53, 54: 2 ways
+
+
+- 61, 62, 63, 64, 65: 2 ways
+
+
+- any double: 1 way
+
+
+- 21("Mexico): 2 ways
 
 The `rollDice()` function in the dice.js file outputs a score according to these rule by comparing the numbers from each die rolled and checking which is greater, like so:
 
@@ -82,7 +101,14 @@ User Stories
 
 6. If the player makes it through five rounds, they win the game. If the player loses all of their lives before five rounds, they lose the game.
 
+Thanks
+------
 
+Thank you to Michael Siller and Michael Christenson for helping with logic and styling related problems I encountered.
+
+Thank you to Aaron Ryder for recommending how I approach the computer's AI.
+
+Thank you to Tim Malstead for testing and helping me debug parts of the game. 
 
 
 
