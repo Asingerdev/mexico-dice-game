@@ -348,3 +348,17 @@ $('#submit').on('click', (e) => {
     $('#player-name').text(`Player: ${$inputValue}`);
     const timeoutID = setTimeout($.proxy(game.setUp, game), 3000)
 })
+
+//Modal CSS
+$('.modal').on('shown.bs.modal', function() {
+    $(".modal-body").css("padding",'0px');
+    $(".modal-body").css("margin",'10px');
+    $(".modal-dialog").css({
+               'position': 'relative',
+               'display': 'table',
+               'overflow-y': 'auto',    
+               'overflow-x': 'auto',
+               'width': 'auto',
+               'min-width': '10px'
+    });
+ });
