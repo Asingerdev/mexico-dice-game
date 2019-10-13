@@ -302,7 +302,8 @@ const reRoll = function(){
 
 //Roll Button
 $roll.on('click', function(e){
-        p.score = diceRoll();
+        $('audio#roll-sound')[0].play();
+        setTimeout(p.score = diceRoll(), 2000);
         $transBox.text(`Player rolls ${p.score}`)
         $pScore.text(`Score: ${p.score}`);
         p.increaseCount();
@@ -358,16 +359,3 @@ $('#submit').on('click', (e) => {
     const timeoutID = setTimeout($.proxy(game.setUp, game), 2000);
 })
 
-//Modal CSS
-$('.modal').on('shown.bs.modal', function() {
-    $(".modal-body").css("padding",'0px');
-    $(".modal-body").css("margin",'10px');
-    $(".modal-dialog").css({
-               'position': 'relative',
-               'display': 'table',
-               'overflow-y': 'auto',    
-               'overflow-x': 'auto',
-               'width': 'auto',
-               'min-width': '10px'
-    });
- });
