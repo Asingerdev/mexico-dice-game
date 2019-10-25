@@ -48,11 +48,15 @@ const game = {
             p.winRound = null;
             p.leadRoll = false;
             $turn.text('Turn: Comp');
+            this.increaseRound();
+            $round.text(`Round: ${this.round}`)
         }else if(p.winRound === false){
             $roll.attr('disabled', false);
             p.winRound = null;
             p.leadRoll = true;
             $turn.text('Turn: Player');
+            this.increaseRound();
+            $round.text(`Round: ${this.round}`)
         }else if(p.winRound === null){
             this.setUp();
         }
@@ -67,8 +71,6 @@ const game = {
         comp.clearCount();
         comp.clearScore();
         $end.animate({'opacity':0}, 'slow');
-        this.increaseRound();
-        $round.text(`Round: ${this.round}`)
         if(this.round === 5 && p.lives !== 0){
             $transBox.text('Player wins game!');
             $roll.attr('disabled', true);

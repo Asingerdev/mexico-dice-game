@@ -5,15 +5,15 @@ Introduction
 ------------
 Mexico is an elimination-style dice game with unique game mechanics.  
 
-Some versions of Mexico incorporate betting, but in this version one player plays against a computer AI. The player is given a set amount of lives and must win a fixed number of rounds against the computer in order to win the game. The number of lives the player has and number of rounds they must win can be adjusted to change the difficulty. 
+Some versions of Mexico incorporate betting, but in this version one user plays against the computer. The player is given a set number of lives and must win a certain number of rounds to win the game. The number of lives and the number of rounds can be adjusted in future versions to change the game's difficulty. 
 
 Scoring System
 --------------
-In each round the player and computer roll two dice. The game has a unique scoring system that concatenates the numbers from each die to determine the score of the roll. For instance, if the player rolls a '5' on the first die, and a '4' on the second die, their score would be 54. Similarly, a roll of '2' and '2' would result in a score of 22. 
+In each round the player and computer roll two dice. The game has a unique scoring system that concatenates the numbers from each die to determine the score of the roll. For instance, if a player rolls a '5' with one die and a '4' with the other, their score from the roll would be 54. Similarly, a roll of '2' and '2' would result in a score of 22. 
 
-The highest possible score in the game is '21', also called 'Mexico'. The next highest scores are any double numbers, in descending order ('66', '55', '44', '33', '22', '11'), followed by non-double numbers in descending order ('65', '64'...'13', '12').
+The highest possible score in the game is '21', also called 'Mexico'. The next highest scores are any double numbers in descending order ('66', '55', '44', '33', '22', '11'), followed by non-double numbers in descending order ('65', '64'...'13', '12').
 
-Although there are thirty-six possible results for any roll of two dice, in Mexico there are ony twenty-one meaningful results. As a rule, the higher number from the two die is used as the first number of the combined numbers that determines the score. For instance, a roll of '2' and '1' and a roll of '1' and '2' would both result in a score of 21. 
+Although there are thirty-six possible results for any roll of two dice, in Mexico there are only twenty-one meaningful results. As a rule, the higher number of the two dice is used as the first number of the combined score. For instance, a roll of '2' and '1' and a roll of '1' and '2' would both result in a score of 21. 
 
 The full list of possible scores in the game and the number of ways to roll them is below:
 
@@ -24,7 +24,7 @@ The full list of possible scores in the game and the number of ways to roll them
 *any double: 1 way
 *21("Mexico): 2 ways
 
-The `rollDice()` function in the dice.js file outputs a score according to these rule by comparing the numbers from each die rolled and checking which is greater, like so:
+The `rollDice()` function in the dice.js file outputs a score according to the game's rules by comparing the numbers from each die rolled and checking which is greater, like so:
 
     if(Number(stringNum1) > Number(stringNum2) || Number(stringNum1) === Number(stringNum2)){
         newNum = stringNum1 + stringNum2;
@@ -34,13 +34,15 @@ The `rollDice()` function in the dice.js file outputs a score according to these
 
 Gameplay
 --------
-To initiate the game, the player and computer each roll one die. Whoever has the higher number rolls first in round one. If they roll the same number, they keep rolling until one gets a higher number. 
+To initiate the game, the player and computer each roll one die. Whoever has the higher number gets to roll first in round one. If both roll the same number, they keep rolling until one rolls a higher number. 
 
-In each round, the lead roller rolls up to three times. If the player is lead roller, they can choose to end their turn after any roll by clicking the end button. The computer determines how many times to roll based on a series of pre-programmed scoring thresholds (see AI section below). If the lead roller rolls a '21', or Mexico, the dice immediately pass to the other player. The second roller then has three chances to roll to match '21', regardless of how many times the lead roller rolled. 
+In each round, the lead roller rolls up to three times. If the player is lead roller, they can choose to end their turn after any individual roll by clicking the end button. The computer determines how many times to roll based on a series of pre-programmed scoring thresholds (see computer section below). 
 
-Only the last result of a player or computer's turn counts as their final score for that turn, rather than best result of two or three rolls. 
+Only the last roll of a player or computer's turn counts as their score for that turn.
 
-The second roller can only roll as many times as the lead roller. For instance, if the lead roller rolls twice, the second roller is only able to roll twice. When the second roller finishes rolling, the two final scores are compared and the winner of the round is determined based on the scoring system. The loser of the round becomes the lead roller in the next round. If the round results in a tie, the player and computer roll one die to determine order again.
+The second roller is limited by the number of times the lead roller rolls. For instance, if the lead roller rolls twice, the second roller is only able to roll twice. When the second roller finishes rolling, the two final scores are compared and the winner of the round is determined based on the game's scoring system. The loser of the round then becomes the lead roller in the next round. If the round results in a tie, the player and computer roll one die to determine the order again.
+
+If the lead roller rolls a '21', or Mexico, their turn automatically ends, no matter how many times they've rolled. The second roller then has three chances to match '21' regardless of how many times the lead roller rolled. 
 
 If the player makes it through the designated number of rounds, they win the game. 
 
@@ -55,7 +57,7 @@ If it rolls between 33 and 44, or between 44 and 55, there is a 50% chance it wi
 
 If it rolls between 11 and 22, or between 22 and 33, it will reroll.
 
-If the computer is the second roller, it will follow the same logic, except it is limited by the number of times the player rolled, and if any of its rolls beat the player, it will end its turn. 
+If the computer is the second roller, it will follow the same logic,except it is limited by the number of times the player rolled, and if any of its rolls beat the player, it will end its turn. 
 
 Future versions of the game can adjust the computer AI's difficulty based upon the game's advanced probability tables. 
 
@@ -77,14 +79,3 @@ User Stories
 5. The loser of the round gets to roll first in the subsequent round. 
 
 6. If the player makes it through five rounds, they win the game. If the player loses all of their lives before five rounds, they lose the game.
-
-
-
-
-
-
-
-
-
-
-
