@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,6 +13,7 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/style.css" media="screen">
 </head>
+
 <body>
     <div class="container-fluid">
         <div class="page-header">
@@ -22,37 +24,42 @@
                 <small class="small" id="play">Play</small>
                 <small class="small">|</small>
                 <small id="about" data-toggle="modal" data-target="#aboutModal"> About</small>
-                <div id="aboutModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div id="aboutModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                    aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
-                       <div class="modal-content">
-                         <div class="modal-header">
-                           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;  </button>
-                           <h2 class="modal-title" id="myModalLabel">Mexico: The Dice Game</h2>
-                         </div>
-                         <div class="modal-body">
-                             Mexico is an elimination style dice game where a user plays against the computer. 
-                             
-                             The score from each roll is determined by combining the numbers from each of the die. 
-                             
-                             Click play and enter your name to begin.
-                         </div>
-                         <div class="modal-footer">
-                           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                         </div>
-                       </div>
-                     </div>
-                   </div>
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;
+                                </button>
+                                <h2 class="modal-title" id="myModalLabel">Mexico: The Dice Game</h2>
+                            </div>
+                            <div class="modal-body">
+                                Mexico is an elimination style dice game where a user plays against the computer.
+
+                                The score from each roll is determined by combining the numbers from each of the die.
+
+                                Click play and enter your name to begin.
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </h1>
         </div>
     </div>
-    <div class="container" id="content-div">
+    <div class="container-fluid" id="content-div">
         <div class="row" id="main-row">
             <div class="col-sm-8" style="height: 450px; max-width: auto;">
                 <img src="assets/images/mexican-desert.png" class="img-fluid w-100" id="desert" alt="desert">
                 <h4>
                     <span id="round">Round:</span>
-                    <span class="pull-right"><button type="button" class="btn btn-secondary btn-lg" style="opacity: 0;" data-toggle="button" aria-pressed="false" autocomplete="off" id="end-button">End</button></span>
-                    <span class="pull-right"><button type="button" class="btn btn-lg" data-toggle="button" aria-pressed="false" autocomplete="off" id="roll-button" disabled>Roll</button></span>
+                    <span class="pull-right"><button type="button" class="btn btn-secondary btn-lg" style="opacity: 0;"
+                            data-toggle="button" aria-pressed="false" autocomplete="off"
+                            id="end-button">End</button></span>
+                    <span class="pull-right"><button type="button" class="btn btn-lg" data-toggle="button"
+                            aria-pressed="false" autocomplete="off" id="roll-button" disabled>Roll</button></span>
                     <audio id="roll-sound">
                         <source src="assets/audio/Shake And Roll Dice-SoundBible.com-591494296.wav" type="audio/wav">
                     </audio>
@@ -62,7 +69,8 @@
             <div class="col-sm-4" style="height: 450px;">
                 <div class="row">
                     <div class="d-flex flex-sm-column" style="height:150px;">
-                        <div class="h4" id="player-name">Player: <input id="inputName" type="text" name="name" placeholder="name" hidden><input id="submit" type="submit" value="enter" hidden></div>
+                        <div class="h4" id="player-name">Player: <input id="inputName" type="text" name="name"
+                                placeholder="name" hidden><input id="submit" type="submit" value="enter" hidden></div>
                         <div class="p-2" id="p-lives">Lives:</div>
                         <div class="p-2" id="p-throws">Dice Throws:</div>
                         <div class="p-2" id="p-score">Score:</div>
@@ -82,4 +90,5 @@
     <script src="js/dice.js"></script>
     <script src="js/game.js"></script>
 </body>
+
 </html>

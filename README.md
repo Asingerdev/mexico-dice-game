@@ -46,7 +46,7 @@ If the lead roller rolls a '21', or Mexico, their turn automatically ends, no ma
 
 If the player makes it through the designated number of rounds, they win the game. 
 
-Computer AI
+Computer
 -----------
 
 The computer decides how many times to roll based on the following logic:
