@@ -5,11 +5,11 @@ Introduction
 ------------
 Mexico is an elimination-style dice game with unique game mechanics.  
 
-Some versions of Mexico incorporate betting, but in this version one player plays against a computer AI. The player is given a set amount of lives and must win a fixed number of rounds against the computer in order to win the game. The number of lives the player has and number of rounds they must win can be adjusted to change the difficulty.
+Some versions of Mexico incorporate betting, but in this version one player plays against a computer opponent. The player is given a set amount of lives and must win a fixed number of rounds against the computer in order to win the game. The number of lives the player has and number of rounds they must win can be adjusted to change the difficulty.
 
 Live Link
 ---------
-[Mexico: The Dice Game](https://kefka223.github.io/Mexico-Dice-Game/)
+[Mexico: The Dice Game](https://asingerdev.github.io/Mexico-Dice-Game/)
 
 Technologies Used
 -----------------
@@ -67,10 +67,10 @@ The second roller can only roll as many times as the lead roller. For instance, 
 
 If the player makes it through the designated number of rounds, they win the game. 
 
-Computer AI
+Computer Opponent
 -----------
 
-The computer decides how many times to roll based on the following logic:
+The computer opponent decides how many times to roll based on the following logic:
 
 If the computer is the lead roller and it rolls Mexico ('21') or a double number, it will end its turn. 
 
@@ -80,7 +80,7 @@ If it rolls 31, 32, 41, 42, 43, 51 or 52 it will reroll.
 
 If the computer is the second roller, it will follow the same logic, except it is limited by the number of times the player rolled, and if any of its rolls beat the player, it will end its turn. 
 
-Future versions of the game can adjust the computer AI's difficulty based upon the game's probability tables. 
+Future versions of the game will adjust the computer's difficulty based upon the game's probability tables. 
 
 User Stories
 ------------
@@ -93,7 +93,7 @@ User Stories
 
 3. If the player rolls **Mexico** (21), their turn is over no matter how many times they've rolled. The computer can then only roll as many times as the player rolled, unless the player rolled **Mexico** in which case the computer can roll up to three times still.
 
-4. If the computer rolls first, the computer AI determines how many times it rolls. After it ends its turn, the player can only roll as many times as the computer, unless the computer rolls **Mexico**. 
+4. If the computer rolls first, the computer will roll up to three times. After it ends its turn, the player can only roll as many times as the computer rolled, unless the computer rolled **Mexico**. 
 
 5. When the round is over, the players' and computers' scores are compared and the winner of the round is determined. The scoring metrics on the display are then cleared, and if the player loses the round, they lose one of their lives.  
 
