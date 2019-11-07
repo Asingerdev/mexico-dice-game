@@ -3,9 +3,9 @@ Mexico: The Dice Game
 
 Introduction
 ------------
-Mexico is an elimination-style dice game with unique game mechanics.  
+Mexico is an elimination-style dice game with unique game mechanics. Some versions of Mexico incorporate betting, but in this version one player plays against a computer opponent. 
 
-Some versions of Mexico incorporate betting, but in this version one player plays against a computer opponent. The player is given a set amount of lives and must win a fixed number of rounds against the computer in order to win the game. The number of lives the player has and number of rounds they must win can be adjusted to change the difficulty.
+The player is given a set amount of lives and must win a fixed number of rounds against the computer in order to win the game. The number of lives the player has and number of rounds they must win can be adjusted to change the difficulty.
 
 Live Link
 ---------
