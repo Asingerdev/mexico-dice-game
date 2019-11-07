@@ -5,7 +5,6 @@ Introduction
 ------------
 Mexico is an elimination-style dice game with unique game mechanics.  
 
-<<<<<<< HEAD
 Some versions of Mexico incorporate betting, but in this version one player plays against a computer opponent. The player is given a set amount of lives and must win a fixed number of rounds against the computer in order to win the game. The number of lives the player has and number of rounds they must win can be adjusted to change the difficulty.
 
 Live Link
@@ -20,9 +19,6 @@ Technologies Used
 - Google Fonts
 - Bootstrap
 - CSS
-=======
-Some versions of Mexico incorporate betting, but in this version one user plays against the computer. The player is given a set number of lives and must win a certain number of rounds to win the game. The number of lives and the number of rounds can be adjusted in future versions to change the game's difficulty. 
->>>>>>> sound
 
 Scoring System
 --------------
@@ -73,11 +69,7 @@ If the lead roller rolls a '21', or Mexico, their turn automatically ends, no ma
 
 If the player makes it through the designated number of rounds, they win the game. 
 
-<<<<<<< HEAD
 Computer Opponent
-=======
-Computer
->>>>>>> sound
 -----------
 
 The computer opponent decides how many times to roll based on the following logic:
@@ -110,7 +102,6 @@ User Stories
 5. The loser of the round gets to roll first in the subsequent round. 
 
 6. If the player makes it through five rounds, they win the game. If the player loses all of their lives before five rounds, they lose the game.
-<<<<<<< HEAD
 
 Thanks
 ------
@@ -120,14 +111,3 @@ Thank you to Michael Siller and Michael Christenson for helping with logic and s
 Thank you to Aaron Ryder for recommending how I approach the computer's AI.
 
 Thank you to Tim Malstead for testing and helping me debug parts of the game. 
-
-
-
-
-
-
-
-
-
-=======
->>>>>>> sound
