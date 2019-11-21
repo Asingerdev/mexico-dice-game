@@ -16,7 +16,6 @@ const diceRoll = function(){
     }else{
         newNum = stringNum2 + stringNum1;
     }
-    console.log(Number(newNum))
     return Number(newNum);
 }
 
