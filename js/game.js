@@ -1,19 +1,33 @@
 console.log("linked")
 
+//Global JQuery DOM elements
+const $round = $('#round');
+const $turn = $('#turn');
+const $roll = $('#roll-button');
+const $end = $('#end-button');
+const $pScore = $('#p-score');
+const $pThrows = $('#p-throws');
+const $pLives = $('#p-lives')
+const $cScore = $('#c-score');
+const $cThrows = $('#c-throws');
+const $play = $('#play');
+const $about = $('#about');
+const $inputName = $('#inputName');
+const $transBox = $('#transbox');
+const $rollSound = $('#roll-sound');
+
 //Game Object
 const game = {
     round: 0,
     increaseRound() {
-        this.round++
+        this.round++;
         $round.text(`Round: ${this.round}`);
     },
     //Sets up turn order in the first round 
     //after player and computer each roll one die
     setUp() {
         p.score = initialRoll();
-        console.log(`Player rolls a ${p.score}`);
         comp.score = initialRoll();
-        console.log(`Computer rolls a ${comp.score}`);
         if (p.score > comp.score) {
             this.increaseRound();
             p.leadRoll = true;
@@ -32,26 +46,26 @@ const game = {
         }
     },
     endTurn() {
-        if (p.leadRoll === true) {
+        if (p.leadRoll) {
             $roll.attr('disabled', true);
             $end.animate({ 'opacity': 0 }, 'slow');
             $turn.text('Turn: Comp');
-            this.compRoll();
-        } else if (p.leadRoll === false) {
+            setTimeout($.proxy(this.compRoll, game), 2000);
+        } else if (!p.leadRoll) {
             $roll.attr('disabled', false);
             $turn.text('Turn: Player');
         }
     },
     setRound() {
-        if (p.winRound === true) {
-            setTimeout($.proxy(this.compRoll, game), 2000);
+        if (p.winRound) {
             $roll.attr('disabled', false);
             p.winRound = null;
             p.leadRoll = false;
             $turn.text('Turn: Comp');
             this.increaseRound();
             $round.text(`Round: ${this.round}`)
-        } else if (p.winRound === false) {
+            setTimeout($.proxy(this.compRoll, game), 2000);
+        } else if (!p.winRound) {
             $roll.attr('disabled', false);
             p.winRound = null;
             p.leadRoll = true;
@@ -64,18 +78,17 @@ const game = {
     },
     endRound() {
         if (p.lives === 0) {
-            $transBox.text('Player loses game!');
+            $transBox.text('Player loses!');
             $roll.animate({ 'opacity': 0 }, 'slow');
-        }
-        p.clearCount();
-        p.clearScore();
-        comp.clearCount();
-        comp.clearScore();
-        $end.animate({ 'opacity': 0 }, 'slow');
-        if (this.round === 5 && p.lives !== 0) {
+        } else if (this.round === 5 && p.lives > 0) {
             $transBox.text('Player wins game!');
-            $roll.attr('disabled', true);
+            $roll.animate({ 'opacity': 0 }, 'slow');
         } else {
+            p.clearCount();
+            p.clearScore();
+            comp.clearCount();
+            comp.clearScore();
+            $end.animate({ 'opacity': 0 }, 'slow');
             this.setRound();
         }
     },
@@ -85,9 +98,9 @@ const game = {
         $cScore.text(`Score: ${comp.score}`);
         comp.increaseCount();
         $cThrows.text(`Dice Throws: ${comp.rollCount}`)
-        if (p.leadRoll === false) {
+        if (!p.leadRoll) {
             setTimeout($.proxy(this.compDecide, game), 2000);
-        } else if (p.leadRoll === true) {
+        } else if (p.leadRoll) {
             if (p.rollCount === 1) {
                 checkScore(p.score, comp.score);
             } else if (p.rollCount === 2) {
@@ -170,7 +183,7 @@ const game = {
     compDecide() {
         if (comp.score === 21) {
             this.endTurn();
-        } else if (scoreArr.includes(comp.score) || comp.rollCount === 3 || (p.leadRoll === true && comp.rollCount === p.rollCount)) {
+        } else if (scoreArr.includes(comp.score) || comp.rollCount === 3 || (p.leadRoll && comp.rollCount === p.rollCount)) {
             this.endTurn();
         } else if (comp.score === 53 || comp.score === 54 || (55 < comp.score && comp.score < 66)) {
             reRoll();
@@ -227,72 +240,56 @@ const comp = {
     }
 };
 
-//Global JQuery DOM elements
-const $round = $('#round');
-const $turn = $('#turn');
-const $roll = $('#roll-button');
-const $end = $('#end-button');
-const $pScore = $('#p-score');
-const $pThrows = $('#p-throws');
-const $pLives = $('#p-lives')
-const $cScore = $('#c-score');
-const $cThrows = $('#c-throws');
-const $play = $('#play');
-const $about = $('#about');
-const $inputName = $('#inputName');
-const $transBox = $('#transbox');
-const $rollSound = $('#roll-sound')
-
 //Scoring System
 const scoreArr = [21, 66, 55, 44, 33, 22, 11];
 
 //Function that compares player's score to computer's score and determines winner of round
-const checkScore = function (pScore, compScore) {
+const checkScore = (pScore, compScore) => {
     if (scoreArr.includes(pScore) && scoreArr.includes(compScore)) {
         const index1 = scoreArr.indexOf(pScore);
         const index2 = scoreArr.indexOf(compScore);
         if (index2 > index1) {
             $transBox.text('Player wins round!');
             p.winRound = true;
-            game.endRound();
+            setTimeout($.proxy(game.endRound, game), 2000);
         } else if (index1 > index2) {
             $transBox.text('Computer wins round!');
             p.winRound = false;
             p.loseLives();
-            game.endRound();
+            setTimeout($.proxy(game.endRound, game), 2000);
         } else if (index1 === index2) {
             $transBox.text('Round is a tie!');
-            game.endRound();
+            setTimeout($.proxy(game.endRound, game), 2000);
         }
     } else if (scoreArr.includes(pScore) && !scoreArr.includes(compScore)) {
         $transBox.text('Player wins round!');
         p.winRound = true;
-        game.endRound();
+        setTimeout($.proxy(game.endRound, game), 2000);
     } else if (scoreArr.includes(compScore) && !scoreArr.includes(pScore)) {
         $transBox.text('Computer wins round!');
         p.winRound = false;
         p.loseLives();
-        game.endRound();
+        setTimeout($.proxy(game.endRound, game), 2000);
     } else if (!scoreArr.includes(pScore) && !scoreArr.includes(compScore)) {
         if (pScore > compScore) {
             $transBox.text('Player wins round!');
             p.winRound = true;
-            game.endRound();
+            setTimeout($.proxy(game.endRound, game), 2000);
         } else if (compScore > pScore) {
             $transBox.text('Computer wins round!');
             p.winRound = false;
             p.loseLives();
-            game.endRound();
+            setTimeout($.proxy(game.endRound, game), 2000);
         } else if (pScore === compScore) {
             $transBox.text('Round is a tie!');
-            game.endRound();
+            setTimeout($.proxy(game.endRound, game), 2000);
         }
     }
 }
 
 //Function that gives 50/50 chance whether 
 //the computer rolls dice again
-const reRoll = function () {
+const reRoll = () => {
     const num = Math.floor(Math.random() * 100);
     if (num > 50) {
         game.endTurn();
@@ -304,52 +301,54 @@ const reRoll = function () {
 //Event Listeners
 
 //Roll Button
-$roll.on('click', function (e) {
+$roll.on('click', (e) => {
     $('audio#roll-sound')[0].play();
     setTimeout(p.score = diceRoll(), 2000);
     $transBox.text(`Player rolls ${p.score}`)
     $pScore.text(`Score: ${p.score}`);
     p.increaseCount();
-    if (p.rollCount === 1 || p.rollCount === 2 || p.rollCount === 3) {
-        $end.css({ 'opacity': 1 });
-    }
-    if (p.score === 21 && p.leadRoll === true) {
+    if (p.score === 21 && p.leadRoll) {
         game.endTurn();
     } else if (p.rollCount === 3 && p.leadRoll === true) {
         game.endTurn();
     }
-    if (p.rollCount === comp.rollCount && p.leadRoll === false) {
+    if (p.rollCount === 1 || p.rollCount === 2 || p.rollCount === 3) {
+        $end.css({ 'opacity': 1 });
+    }
+    if (p.rollCount === comp.rollCount && !p.leadRoll) {
         $roll.attr("disabled", true);
         checkScore(p.score, comp.score);
     }
 })
 
 //End Turn Button
-$end.on('click', function (e) {
-    if (p.leadRoll === true) {
+$end.on('click', (e) => {
+    if (p.leadRoll) {
         game.endTurn();
         setTimeout($.proxy(game.compRoll, game), 2000);
-    } else if (p.leadRoll === false) {
+    } else if (!p.leadRoll) {
         checkScore(p.score, comp.score);
     }
 })
 
 //Play Hover
-$play.hover(function () {
+$play.hover(() => {
     $play.css("background-color", "white");
-}, function () {
+    $play.css('cursor', 'pointer');
+}, () => {
     $play.css("background-color", "");
 })
 
 //About Hover
-$about.hover(function () {
+$about.hover(() => {
     $about.css("background-color", "white");
-}, function () {
+    $about.css('cursor', 'pointer');
+}, () => {
     $about.css("background-color", "");
 })
 
 //Click text to play game
-$play.on('click', function () {
+$play.on('click', () => {
     $inputName.attr('hidden', false)
     $('#submit').attr('hidden', false)
     $play.off('click');
