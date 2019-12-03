@@ -14,9 +14,8 @@ Live Link
 Technologies Used
 -----------------
 - HTML5
-- JavaScript es6
+- JavaScript (es6)
 - JQuery
-- Google Fonts
 - Bootstrap
 - CSS
 
@@ -51,7 +50,7 @@ The `rollDice()` function in the dice.js file outputs a score according to the g
 
     if(Number(stringNum1) > Number(stringNum2) || Number(stringNum1) === Number(stringNum2)){
         newNum = stringNum1 + stringNum2;
-    }else{
+    } else {
         newNum = stringNum2 + stringNum1;
     }
 
